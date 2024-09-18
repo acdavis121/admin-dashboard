@@ -2,7 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { File, PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ProductsTable } from './products-table';
-import { getProducts } from '@/lib/db';
+import { getProducts } from '@/lib/db/schema';
 
 export default async function ProductsPage({
   searchParams

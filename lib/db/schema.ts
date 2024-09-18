@@ -1,7 +1,3 @@
-import 'server-only';
-
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
 import {
   pgTable,
   text,
@@ -11,10 +7,11 @@ import {
   pgEnum,
   serial
 } from 'drizzle-orm/pg-core';
-import { count, eq, ilike } from 'drizzle-orm';
 import { createInsertSchema } from 'drizzle-zod';
+import { count, eq, ilike } from 'drizzle-orm';
+import { db } from './db';
 
-export const db = drizzle(neon(process.env.POSTGRES_URL!));
+
 
 export const statusEnum = pgEnum('status', ['active', 'inactive', 'archived']);
 
@@ -28,8 +25,10 @@ export const products = pgTable('products', {
   availableAt: timestamp('available_at').notNull()
 });
 
+
 export type SelectProduct = typeof products.$inferSelect;
 export const insertProductSchema = createInsertSchema(products);
+
 
 export async function getProducts(
   search: string,
